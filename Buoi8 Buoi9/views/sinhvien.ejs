@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <script language="javascript">
+      function getSinhVien(hoten, namsinh){
+        document.getElementById('txtHoTen').value=hoten;
+        document.getElementById('txtNamSinh').value=namsinh;
+      }
+    </script>
+  </head>
+
+  <body>
+    <form action="xuly" method="post">
+      <table border="1" width="300px">
+        <tr>
+          <td>Họ tên:</td>
+          <td><input type="text" name="txtHoTen" id="txtHoTen"/></td>
+        </tr>
+        <tr>
+          <td>Năm sinh:</td>
+          <td><input type="text" name="txtNamSinh" id="txtNamSinh"/></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center"><input type="submit" name="btnThem" value="Thêm" id="btnThem" /></td>
+        </tr>
+      </table>
+      <p id="demo"></p>
+    </form>
+
+
+    <table border="1" width="700px">
+      <tr bgColor="yellow" align="center">
+        <td>id</td>
+        <td>Họ tên</td>
+        <td>Năm sinh</td>
+        <td></td>
+      </tr>
+      <% mangSV.forEach(function(sinhvien){ %>
+        <tr>
+          <td align="center"><%= sinhvien.id%></td>
+          <td><%= sinhvien.HoTen%></td>
+          <td align="center"><%= sinhvien.NamSinh%></td>
+          <td align="center">
+            <input type="button" onClick="getSinhVien('<%= sinhvien.HoTen%>', <%= sinhvien.NamSinh%>);" name="btnSelect" id="btnSelect" value="Select" />
+            <form action="xoa/<%= sinhvien.id%>" method="post">
+              <input type="submit" value="Delete" name="btnXoa" />
+            </form>
+          </td>
+        </tr>
+      <% });%>
+    </table>
+
+
+
+  </body>
+
+</html>

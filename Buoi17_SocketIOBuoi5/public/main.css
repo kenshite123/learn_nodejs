@@ -1,0 +1,13 @@
+body{background-color: #d7dfed}
+#wrapper{width: 600px; margin: auto}
+#left, #right{height: 500px; margin-top: 10px}
+#left{width: 30%; background-color: #eaf4b7; float: left; margin-right: 10px}
+#right{width: 68%; background-color: #d6f9d9; float: left}
+.block{width: 100%; clear: both}
+
+#txtMessage, #btnChat{float: left; margin-top: 5px}
+#txtMessage{width: 69%; margin-left: 5px; margin-right: 5px}
+#btnChat{width: 28%;}
+#title{width: 100%; text-align: center; background-color: yellow}
+.hoten{color: red; font-weight: bold}
+#danhsachChat{height: 450px; overflow: scroll; clear: both; margin-left: 5px; margin-top: 5px}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ReactJS</title>
+    <script src="react/react.js"></script>
+    <script src="react/react-dom.js"></script>
+    <script src="react/browser.min.js"></script>
+    <script src="jquery-3.1.1.min.js"></script>
+    <style>
+      .div-note{
+        background-color: yellow;
+        border: solid 3px green;
+        padding: 5px;
+        margin: 5px;
+      }
+    </style>
+
+    <script>
+      $(document).ready(function(){
+        $("#info").click(function(){
+          $.get("/info", function(data){
+            $("#a123").html(data);
+          });
+        });
+
+        $("#hello").click(function(){
+          $.post('/hello',{hoten: 'Khoa', tuoi: 30} ,function(data){
+            // alert(data);
+            $("#a123").html(data);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <button id="info">Get info - GET</button>
+    <button id="hello">Get info - POST</button>
+    <div id="a123">
+
+    </div>
+    <script type="text/babel" src="xuly2.js"></script>
+
+  </body>
+</html>

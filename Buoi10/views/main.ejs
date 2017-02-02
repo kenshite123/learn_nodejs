@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <base href="http://localhost:3000/" />
+    <title>POKEMON</title>
+    <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+    <link rel="stylesheet" href="css/layout.css" type="text/css" />
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <div id="banner"><img src="images/pokemon/poke.jpg" /></div>
+      <div id="search">
+        <form action="search" method="post" id="formSearch">
+          <input type="text" name="txtSearch" id="txtSearch" />
+          <input type="submit" name="btnSearch" id="btnSearch" value="Tìm kiếm" />
+        </form>
+      </div>
+      <div id="content">
+        <% mangPokemon.forEach(function(item){ %>
+          <div class="pokemon">
+            <a href="/detail/<%= item.id%>"><img src="/images/pokemon/<%= item.Hinh%>" /></a>
+            <div><%= item.Ten%></div>
+          </div>
+        <% });%>
+      </div>
+      <div id="thanhphantrang">Trang
+        <% for(var i = 1; i <= tongSoTrang; i++){ %>
+          <a href="/pokemon/<%=i%>" <% if(trangdangxem==i){ %>style="color:red; font-weight: bold; text-decoration: underline;"<% }%> ><%= i%></a>
+        <% }%>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Pokemon</title>
+    <link type="text/css" rel="stylesheet" href="/layout/main.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="banner"><img id="logo" src="/images/pokemon.jpg"></div>
+      <div id="search">
+        <form action="./timkiem" method="post">
+          <input type="text" name="txtPok" id="txtPok" />
+          <input type="submit" name="btnSearch" id="btnSearch" value="Tìm" />
+        </form>
+      </div>
+      <div id="content">
+        <% mangPokemon.forEach(function(item){ %>
+          <div class="pokemon">
+            <div id="hinh"><img src="/images/<%= item.hinh%>" /></div>
+            <div id="ten"><%= item.ten%></div>
+            <div id="id">ID: <%= item.id%></div>
+            <div id="like">
+              Like: <%= item.like%>
+              <form action="./like/<%= item.id%>" method="get">
+                <input type="image" src="/images/like.png" />
+              </form>
+            </div>
+          </div>
+        <% });%>
+     </div>
+    </div>
+  </body>
+</html>

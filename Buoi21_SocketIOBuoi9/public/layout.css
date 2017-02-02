@@ -1,0 +1,5 @@
+#wrapper{width: 90%; margin: auto}
+#main, #right{float: left; min-height: 500px}
+#main{width: 80%}
+#right{width: 17%; background-color: #9ce; padding: 5px}
+.room{border: solid 3px black; padding: 5px; background-color: yellow; margin-top: 10px}

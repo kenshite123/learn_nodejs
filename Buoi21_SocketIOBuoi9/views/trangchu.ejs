@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Caro Online</title>
+    <link href="layout.css" rel="stylesheet" type="text/css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="jquery-3.1.1.min.js"></script>
+    <script>
+      var socket = io("http://localhost:3000");
+
+      socket.on("server-send-register-fail", function(data){
+        alert("Username: " + data + " đã được đăng ký rồi.");
+      });
+
+      socket.on("server-send-register-success", function(data){
+        var s = "<div hoten='"+data.name+"' socket='" + data.id + "' class='u'>" + data.name + "</div>";
+        $("#danhSachUser").append(s);
+        if(data.name == $("#txtUsername").val()){
+          $("#dangky").hide();
+          $("div[hoten='" + data.name + "']").css("color", "red");
+        }else{
+        }
+      });
+
+      socket.on("server-send-room", function(data){
+        // console.log(data);
+        var s = "<div class='room'>Room id: " + data.idRoom;
+        s += "<br>Tên room: " + data.tenRoom;
+        s += "<br>A: " + data.userA_name;
+        if(data.userB_name==null){
+          s += "<br>B: <button type='button' id='join'>Join</button>";
+        }else{
+          s += "<br>B: " + data.userB_name;
+        }
+        s += "</div>";
+        $("#danhSachRoom").append(s);
+      });
+
+      $(document).ready(function(){
+        $("#btnDangKy").click(function(){
+          socket.emit("client-send-username", $("#txtUsername").val());
+        });
+        $("#btnTaoRoom").click(function(){
+          socket.emit("client-create-room", $("#txtRoomName").val());
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="main">
+        <input type="text" id="txtRoomName" placeholder="Room name...">
+        <button id="btnTaoRoom" type="button">Tạo room</button>
+        <hr>
+        <div id="danhSachRoom">
+
+        </div>
+      </div>
+      <div id="right">
+        <div id="dangky">
+          <input type="text" id="txtUsername" placeholder="Username...">
+          <button id="btnDangKy" type="button">Login</button>
+        </div>
+
+        <div id="danhSachUser">
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

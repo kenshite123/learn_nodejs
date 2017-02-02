@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <title>Hello World</title>
+    <meta charset="utf-8">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="jquery-3.1.1.min.js"></script>
+    <script>
+      var socket = io("http://localhost:3000");
+
+      socket.on("server-send-dang-ky-that-bai", function(data){
+        alert("Username này đã tồn tại");
+      });
+
+      socket.on("server-send-dang-ky-thanh-cong", function(data){
+        var s = "<div class='motUser' socketid='"+data.id+"'>"+data.username+"</div>";
+        $("#danhsachOnline").append(s);
+      });
+
+      socket.on("hide-form-dang-ky", function(data){
+        $("#txtUser").hide();
+        $("#btnDangKy").hide();
+      });
+
+      socket.on("server-send-message", function(data){
+        var hoten = "<span class='hoten'>"+data.Username+": </span>";
+        var msg = "<span class='msg'>"+data.msg+"</span>";
+        $("#danhsachChat").append(hoten + msg + "<div class='block'></div>");
+      });
+
+      $(document).ready(function(){
+        $("#btnDangKy").click(function(){
+          socket.emit("client-tao-user", $("#txtUser").val());
+        });
+        $("#btnChat").click(function(){
+          if($("#txtMessage").val() == ""){
+            alert("Chưa nhập nội dung chat");
+            return;
+          }
+          socket.emit("client-send-message", $("#txtMessage").val());
+          $("#txtMessage").val("");
+        });
+
+        $(document).on("click", ".motUser", function(){
+          var id = $(this).attr("socketid");
+          // console.log(id);
+          // socket.emit();
+        });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <input type="text" id="txtUser" placeholder="Username:" />
+      <input type="button" id="btnDangKy" value="Đăng ký" />
+      <div class="block"></div>
+      <div id="left">
+        <div id="title">Users Online</div>
+        <div id="danhsachOnline"></div>
+      </div>
+      <div id="right">
+        <input type="text" id="txtMessage" placeholder="Message:" />
+        <input type="button" id="btnChat" value="Send" />
+        <div class="block"></div>
+        <div id="danhsachChat"></div>
+      </div>
+    </div>
+  </body>
+</html>

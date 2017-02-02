@@ -1,0 +1,9 @@
+cài express-session:
+  --npm install express-session
+
+sử dụng:
+  --khai báo:
+      app.use(session({
+        secret: '' // ko để cho ai biết chỗ này
+        cookie: { } // truyền json vào
+      }))

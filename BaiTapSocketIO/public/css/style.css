@@ -1,0 +1,9 @@
+#danhsach{max-width: 400px; min-height: 200px; float: left; background-color: #e6f2ff; margin-top: 20px}
+#chat{ min-width: 600px; min-height: 300px; float: left; background-color: #ffe6e6; margin-left: 20px}
+.user{margin-bottom: 4px; cursor: pointer; margin-left: 2px; margin-right: 2px; border: solid 1px grey}
+#khungchat { width: 100%; height: 90%; float: left;}
+#footer{width: 100%; height: 5%; float: left}
+#txtChat{width: 85%; float: left; margin-right: 10px; margin-left: 10px}
+#btnChat{width: 10%; float: left;}
+.chat-client{float: right;}
+.chat-client{float: left;}

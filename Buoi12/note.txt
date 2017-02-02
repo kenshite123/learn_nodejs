@@ -1,0 +1,16 @@
+- cài đặt JsonWebToken: npm install jsonwebtoken
+- require: var jwt = require("jsonwebtoken");
+- tạo secretKey ==> bảo mật cái này
+- tạo biến token = jwt.sign(
+    {}, // json chứa thông tin
+    secret, // biến secret
+    {expiresIn: 30, algorithm: } // biến 1: thời gian sống ---> tính bằng giây && biến 2: kiểu mã hóa
+);
+
+- xác thực token:
+  jwt.verify(
+    token, // biến token
+    secret, // biến secret
+    function(err, decoded){ // hàm xác thực
+    }
+  );

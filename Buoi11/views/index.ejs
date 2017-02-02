@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Demo menu 2 cấp</title>
+    <script src="scripts/jquery-3.1.0.min.js"></script>
+    <link href="layout/layout.css" rel="stylesheet" type="text/css"></link>
+    <script>
+      $(document).ready(function(){
+
+        $(".theloai").mouseover(function(){
+          $(this).next().slideToggle();
+        });
+        $(".theloai").mouseout(function(){
+          $(this).next().slideToggle();
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="menu">
+      <% mangMenu.forEach(function(item){ %>
+        <div class="theloai"><%= item.theloai%></div>
+        <div class="nhom">
+          <% item.loaitin.forEach(function(lt){ %>
+            <div class="loaitin"><%= lt%></div>
+          <% });%>
+        </div>
+      <% });%>
+    </div>
+
+  </body>
+
+</html>

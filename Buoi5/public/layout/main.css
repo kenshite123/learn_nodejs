@@ -1,0 +1,4 @@
+body{ background-color: yellow}
+.root{background-color: pink ;color:green}
+.child{color: red; margin-left: 50px}
+div{width: 200px}

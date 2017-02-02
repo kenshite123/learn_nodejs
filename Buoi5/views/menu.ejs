@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Tin tức trong ngày</title>
+    <script type="text/javascript" src="scripts/jquery-3.1.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="layout/main.css" />
+    <script>
+      $(document).ready(function(){
+        $(".root").click(function(){
+          $(this).next().slideToggle();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <% mangMenu.forEach(function(item){ %>
+      <div class="root"><%= item.root%></div>
+      <div>
+        <%item.child.forEach(function(itemChild){ %>
+          <div class="child"><%= itemChild%></div>
+        <% }); %>
+      </div>
+    <% }); %>
+  </body>
+</html>

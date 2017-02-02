@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Chat Socket</title>
+      <script src="jquery-3.1.0.min.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+      <script>
+        var socket = io('http://localhost:3000/');
+
+        socket.on("server-gui-un", function(data){
+          $("#danhsach").append("<h2>" + data + "</h2>");
+        });
+
+        socket.on("server-gui-thong-bao", function(data){
+          alert(data);
+        });
+
+        $(document).ready(function(){
+          $("#btnSend").click(function(){
+            var v = $("#txtUsername").val();
+            // ở đây có thể truyền các dạng: object, json, mảng, ...
+            socket.emit("client-gui-un", v);
+
+            //truyền theo kiểu json
+            //socket.emit("ten_ket_noi", {hoten: abc, namsinh:123});
+
+          });
+        });
+
+      </script>
+  </head>
+
+  <body>
+    <h1>Chat Socket.io</h1>
+    <input type="text" id="txtUsername" />
+    <input type="button" id="btnSend" value="Send" />
+    <div id="danhsach"></div>
+  </body>
+</html>

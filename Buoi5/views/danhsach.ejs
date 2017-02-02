@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Điện thoại giá rẻ</title>
+  </head>
+
+  <body>
+    <table border="1">
+        <% mangSP.forEach(function(sp){ %>
+          <tr>
+            <td><%= sp.ten %></td>
+            <td><img src="/images/<%= sp.hinh%>" width="400px" height="250px" /></td>
+            <td>Giá: <%= sp.gia%></td>
+            </td>
+          </tr>
+        <% }) %>
+
+    </table>
+
+  </body>
+</html>

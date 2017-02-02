@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      table tr td{
+        border: solid 1px black
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>STT</td>
+        <td>Ten san pham</td>
+        <td>Mo ta</td>
+        <td>Hinh</td>
+        <td>Chinh sua</td>
+      </tr>
+      <%mang.forEach(function(sanPham){%>
+        <tr>
+          <td><%=sanPham.id%></td>
+          <td><%=sanPham.tensp%></td>
+          <td><%=sanPham.mota%></td>
+          <td><img src="<%=sanPham.hinh%>" width="100px"></td>
+          <td><a href="/sua/<%=sanPham.id%>">Sua</td>
+        </tr>
+      <%})%>
+    </table>
+  </body>
+</html>

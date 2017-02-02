@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io("http://localhost:3000");
+      socket.on("server-send-quang-cao", function(data){
+
+      });
+
+      $(document).ready(function(){
+        $("#imgHinh").attr("src", "images/" +  $("option:selected").val());
+        $('#sl-quang-cao').change(function() {
+          var valueSelected = $(this).val();
+          $("#imgHinh").attr("src", "images/" + valueSelected);
+        });
+
+        $("#btnSend").click(function(){
+          socket.emit("client-send-quang-cao", $("option:selected").val());
+          // console.log($("option:selected").val());
+          
+        });
+      });
+    </script>
+    <script></script>
+  </head>
+  <body>
+    <select id="sl-quang-cao">
+      <%# <option>--Chọn quảng cáo--</option>%>
+      <% mangQC.forEach(function(item){ %>
+        <option value="<%= item.hinh%>"><%= item.ten%></option>
+      <% }); %>
+    </select>
+    <button type="button" id="btnSend">Send</button><br><br>
+    <img id="imgHinh" />
+  </body>
+</html>

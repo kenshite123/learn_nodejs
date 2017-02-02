@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>Hello World</title>
+    <meta charset="utf-8">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="jquery-3.1.1.min.js"></script>
+    <script>
+      var socket = io("http://localhost:3000");
+
+      socket.on("server-send-new-room", function(data){
+        var s = "<div tenPhong='"+data+"' class='room'>"+data+"</div>";
+        $("#boxRooms").append(s);
+      });
+
+      socket.on("server-send-new-room-changed", function(data){
+        // $("div").removeClass();
+        $("div .room").attr("id", "");
+        $("div[tenPhong='"+data+"']").attr("id", "current");
+      });
+
+      socket.on("server-send-message", function(data){
+        var s = "<div class='chat'>"+data+"</div><div class='block'></div>"
+        $("#khungChat").append(s);
+      });
+
+      $(document).ready(function(){
+        $("#btnTaoRoom").click(function(){
+          socket.emit("user-tao-room", $("#txtRoomName").val());
+        });
+
+        $("#btnChat").click(function(){
+          socket.emit("user-send-message", $("#txtMessage").val());
+        });
+
+        $(document).on("click", ".room", function(){
+          var roomName = $(this).html();
+          socket.emit("user-change-room", roomName);
+        });
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="layout.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <input type="text" id="txtRoomName" placeholder="Room Name..." />
+      <input type="button" id="btnTaoRoom" value="Tạo room" />
+      <div class="block"></div>
+      <div id="boxRooms"></div>
+      <div id="boxMessages">
+        <div id="khungChat">
+
+        </div>
+        <input type="text" id="txtMessage" placeholder="Message..." />
+        <input type="button" id="btnChat" value="Chat" />
+      </div>
+    </div>
+  </body>
+</html>

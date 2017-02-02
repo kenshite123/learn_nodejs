@@ -1,0 +1,3 @@
+- cài đặt: npm install ejs
+- tạo 1 file .html sau đó code html
+- đổi tên file .html thành .ejs

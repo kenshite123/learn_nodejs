@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>Fireworks</title>
+  <script src="jquery-3.1.1.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="jquery.fireworks.js"></script>
+  <script>
+    var socket = io("http://localhost:3000/");
+    var id;
+    socket.on("server-send-id", function(data){
+      //alert(data.length);
+      $("#danhsach").html("");
+      data.forEach(function(v){
+        var s = "<div class='user'>" + v + "</div>"
+        $("#danhsach").append(s);
+      });
+    });
+
+    socket.on("doi-mau", function(data){
+      $("body").fireworks();
+      dem(0);
+    });
+
+    function dem(n){
+      n++;
+      if(n >= 4){
+        $("body").fireworks("destroy");
+        return;
+      }
+      setTimeout("dem(" + n + ")", 1000);
+    }
+
+    $(document).ready(function(){
+      // sự kiện, class or id, function
+      $(document).on("click", ".user", function(){
+        id = $(this).html();
+        //console.log(id);
+        socket.emit("client-send-id", id);
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+  <div id="danhsach"></div>
+</body
+
+</html>

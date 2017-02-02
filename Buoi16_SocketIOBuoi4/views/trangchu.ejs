@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title>Hello World</title>
+  <script src="jquery-3.1.1.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io("http://localhost:3000");
+
+    socket.on('server-tao-room', function(data){
+      var s = "<li tenPhong='" + data + "'>" + data + "</li>";
+      $("#danhsachroom").append(s);
+    });
+
+    socket.on("xac-nhan", function(data){
+      console.log("Room mới là " + data);
+      $("li").removeClass("ao");
+      $("li [tenPhong='" + data + "']").addClass("ao");
+    });
+
+    socket.on("ssmessage-in-room", function(data){
+      $("#danhsachchat").append("<h4>" + data + "</h4>");
+    });
+
+    $(document).ready(function(){
+      $('#btnTaoRoom').click(function(){
+        socket.emit('tao-room', $('#txtRoomname').val());
+      });
+
+      $(document).on("click", "li", function(){
+        var tenRoom = $(this).html();
+        socket.emit("doi-room", tenRoom);
+      });
+
+      $('#btnChat').click(function(){
+        socket.emit('client-chat', $('#txtMessage').val());
+      });
+    });
+  </script>
+
+  <style>
+    .ao{color: red; font-weight: bold}
+  </style>
+</head>
+
+<body>
+
+  <input type="text" id="txtRoomname" placeholder="Room name:"/>
+  <input type="button" id="btnTaoRoom" value="Tạo room" />
+  <ul id="danhsachroom">
+  </ul>
+
+  <input type="text" id="txtMessage" placeholder="Message:"/>
+  <input type="button" id="btnChat" value="Tạo room" />
+  <div id="danhsachchat"></div>
+</body>
+
+</html>

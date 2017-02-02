@@ -1,0 +1,56 @@
+<html>
+<head>
+  <title>Chat socket</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css"></link>
+  <script src="script/jquery-3.1.1.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io("http://localhost:3000");
+    var id;
+
+    socket.on("chat-with-socket-id", function(data){
+      $("#khungchat").html("");
+      var i = data.id;
+      data.mangChat.forEach(function(item){
+        var t = "<div class='chat-server'>" + i + ": " + item + "</div>";
+        $("#khungchat").append(t);
+      });
+    });
+
+    socket.on("server-send-id", function(data){
+      //alert(data.length);
+      $("#danhsach").html("");
+      data.forEach(function(v){
+        var s = "<div class='user'>" + v + "</div>"
+        $("#danhsach").append(s);
+      });
+    });
+
+    $(document).ready(function(){
+      $(document).on("click", ".user", function(){
+        id = $(this).html();
+        socket.emit("client-send-id", id);
+      });
+      $("#btnChat").click(function(){
+        var s = $("#txtChat").val();
+        socket.emit("chat", {id: id, content: s});
+        var chat = "<div class='chat-client'>" + id + ": " + s + "</div>"
+        $("#khungchat").append(chat);
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div id="danhsach"></div>
+  <div id="chat">
+    <div id="khungchat"></div>
+    <div id="footer">
+      <input type="text" name="txtChat" id="txtChat" />
+      <input type="button" name="btnChat" id="btnChat" value="Send" />
+    </div>
+  </div>
+</body>
+
+
+</html>

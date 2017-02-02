@@ -1,0 +1,40 @@
+<% var hoten="Bùi Công Chính" %>
+<% var diem=6; %>
+<%
+var a = 5;
+var b = 10;
+var tong = parseInt(a) + parseInt(b);
+ %><html>
+  <head>
+    <title><%= hoten %></title>
+  </head>
+
+  <body>
+    <h1><%= a + "+" + b + "=" + tong  %></h1>
+
+    <% if(diem>=5){ %>
+      <h1>ĐẬU RỒI AHIHI</h1>
+    <% }else{ %>
+      <h1>ĐẬU CÁI CC TIN NGƯỜI VCL</h1>
+    <% } %>
+
+    <ul>
+      <% danhsach.forEach(function(item){%>
+        <li><%= item %></li>
+      <%}); %>
+    </ul>
+
+    <!-- <img src="images/hinata.png" width="300px" height="500px" /> -->
+    <div>Họ: <%= sinhVien.ho%></div>
+    <div>Tên: <%= sinhVien.ten%></div>
+
+    <table border="2" width="500px">
+      <% for(var i = 0; i < 10; i++){{ %>
+        <tr>
+          <td bgColor="<% if(i%2==0){ %> Yellow <% }else{ %> Blue <% } %>" > <%= i %> </td>
+        </tr>
+      <% }} %>
+    </table>
+  </body>
+
+</html>
